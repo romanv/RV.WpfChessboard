@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Remove="Resources\Pieces\bb.xaml" />
+    <Page Remove="Resources\Pieces\bk.xaml" />
+    <Page Remove="Resources\Pieces\bn.xaml" />
+    <Page Remove="Resources\Pieces\bp.xaml" />
+    <Page Remove="Resources\Pieces\bq.xaml" />
+    <Page Remove="Resources\Pieces\br.xaml" />
+    <Page Remove="Resources\Pieces\wb.xaml" />
+    <Page Remove="Resources\Pieces\wk.xaml" />
+    <Page Remove="Resources\Pieces\wn.xaml" />
+    <Page Remove="Resources\Pieces\wp.xaml" />
+    <Page Remove="Resources\Pieces\wq.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Pieces\bb.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\bk.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\bn.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\bp.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\bq.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\br.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\wb.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\wk.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\wn.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\wp.xaml" />
+    <EmbeddedResource Include="Resources\Pieces\wq.xaml" />
+  </ItemGroup>
+
+</Project>

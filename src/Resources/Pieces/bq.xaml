@@ -1,0 +1,279 @@
+<?xml version="1.0" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+    <DrawingGroup x:Key="bq_xaml">
+        <DrawingGroup.ClipGeometry>
+            <RectangleGeometry Rect="0,0,45.0,45.0" />
+        </DrawingGroup.ClipGeometry>
+        <DrawingGroup>
+            <GeometryDrawing Brush="#ff000000">
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Flat"
+                        LineJoin="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <PathGeometry Figures="M 9 26 C 17.5 24.5 30 24.5 36 26 L 38.5 13.5 L 31 25 L 30.7 10.9 L 25.5 24.5 L 22.5 10 L 19.5 24.5 L 14.3 10.9 L 14 25 L 6.5 13.5 L 9 26 z" FillRule="Nonzero" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#ff000000">
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Round"
+                        EndLineCap="Round"
+                        LineJoin="Round"
+                        StartLineCap="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <PathGeometry Figures="m 9 26 c 0 2 1.5 2 2.5 4 c 1 1.5 1 1 0.5 3.5 c -1.5 1 -1 2.5 -1 2.5 c -1.5 1.5 0 2.5 0 2.5 c 6.5 1 16.5 1 23 0 c 0 0 1.5 -1 0 -2.5 c 0 0 0.5 -1.5 -1 -2.5 c -0.5 -2.5 -0.5 -2 0.5 -3.5 c 1 -2 2.5 -2 2.5 -4 c -8.5 -1.5 -18.5 -1.5 -27 0 z" FillRule="Nonzero" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#ff000000">
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Round"
+                        EndLineCap="Round"
+                        LineJoin="Round"
+                        StartLineCap="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <PathGeometry Figures="M 11.5 30 C 15 29 30 29 33.5 30" FillRule="Nonzero" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#ff000000">
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Round"
+                        EndLineCap="Round"
+                        LineJoin="Round"
+                        StartLineCap="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <PathGeometry Figures="m 12 33.5 c 6 -1 15 -1 21 0" FillRule="Nonzero" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#ff000000">
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Round"
+                        EndLineCap="Round"
+                        LineJoin="Round"
+                        StartLineCap="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <EllipseGeometry
+                        Center="6.0,12.0"
+                        RadiusX="2.0"
+                        RadiusY="2.0" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#ff000000">
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Round"
+                        EndLineCap="Round"
+                        LineJoin="Round"
+                        StartLineCap="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <EllipseGeometry
+                        Center="14.0,9.0"
+                        RadiusX="2.0"
+                        RadiusY="2.0" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#ff000000">
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Round"
+                        EndLineCap="Round"
+                        LineJoin="Round"
+                        StartLineCap="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <EllipseGeometry
+                        Center="22.5,8.0"
+                        RadiusX="2.0"
+                        RadiusY="2.0" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#ff000000">
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Round"
+                        EndLineCap="Round"
+                        LineJoin="Round"
+                        StartLineCap="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <EllipseGeometry
+                        Center="31.0,9.0"
+                        RadiusX="2.0"
+                        RadiusY="2.0" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#ff000000">
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Round"
+                        EndLineCap="Round"
+                        LineJoin="Round"
+                        StartLineCap="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <EllipseGeometry
+                        Center="39.0,12.0"
+                        RadiusX="2.0"
+                        RadiusY="2.0" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing>
+                <GeometryDrawing.Pen>
+                    <Pen
+                        Brush="#ff000000"
+                        DashCap="Flat"
+                        LineJoin="Round"
+                        Thickness="1.5">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes="" />
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <PathGeometry Figures="M 11 38.5 A 35 35 1 0 0 34 38.5" FillRule="Nonzero" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <DrawingGroup>
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#ffffffff"
+                            DashCap="Round"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            StartLineCap="Round"
+                            Thickness="1.5">
+                            <Pen.DashStyle>
+                                <DashStyle Dashes="" />
+                            </Pen.DashStyle>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M 11 29 A 35 35 1 0 1 34 29" FillRule="Nonzero" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#ffffffff"
+                            DashCap="Round"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            StartLineCap="Round"
+                            Thickness="1.5">
+                            <Pen.DashStyle>
+                                <DashStyle Dashes="" />
+                            </Pen.DashStyle>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M 12.5 31.5 L 32.5 31.5" FillRule="Nonzero" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#ffffffff"
+                            DashCap="Round"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            StartLineCap="Round"
+                            Thickness="1.5">
+                            <Pen.DashStyle>
+                                <DashStyle Dashes="" />
+                            </Pen.DashStyle>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M 11.5 34.5 A 35 35 1 0 0 33.5 34.5" FillRule="Nonzero" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#ffffffff"
+                            DashCap="Round"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            StartLineCap="Round"
+                            Thickness="1.5">
+                            <Pen.DashStyle>
+                                <DashStyle Dashes="" />
+                            </Pen.DashStyle>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M 10.5 37.5 A 35 35 1 0 0 34.5 37.5" FillRule="Nonzero" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingGroup>
+    </DrawingGroup>
+    <DrawingImage x:Key="bq" Drawing="{StaticResource bq_xaml}" />
+</ResourceDictionary>
