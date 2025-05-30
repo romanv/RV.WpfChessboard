@@ -31,6 +31,7 @@ Chessboard component for WPF applications.
 | FontFamily | FontFamily | Font family used to draw square coordinates |
 | DrawCoordinates | bool | Draw square coordinates |
 | BlockInteractions | bool | Block all used interactions with the board |
+| Animate | bool | Enable/disable move animations |
 
 ## Events
 
@@ -38,3 +39,4 @@ Chessboard component for WPF applications.
 | --- | --- | --- |
 | OnMoveStarted | MoveStartedEventArgs | Triggered after the interaction with a piece |
 | OnMoveCompleted | MoveCompletedEventArgs | Triggered after the piece is dropped on a target square |
+| OnMoveCancelled | MoveCancelledEventArgs | Triggered after the move is cancelled by pressing ESC or dropping the piece outside of the board |

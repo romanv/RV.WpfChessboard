@@ -8,13 +8,14 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>Romanv.WpfChessboard</PackageId>
     <Title>RV.WpfChessboard</Title>
-    <Version>0.9.0</Version>
+    <Version>0.9.1</Version>
     <Authors>Roman V</Authors>
     <Copyright>AGPL-3.0-or-later</Copyright>
     <PackageProjectUrl>https://github.com/romanv/RV.WpfChessboard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/romanv/RV.WpfChessboard</RepositoryUrl>
     <PackageTags>wpf;chess;chessboard</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,6 +48,10 @@
 
   <ItemGroup>
     <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

@@ -228,6 +228,18 @@ public partial class WpfChessboard : Canvas
         set { SetValue(DrawCoordinatesProperty, value); }
     }
 
+    public static readonly DependencyProperty AnimateProperty = DependencyProperty.Register(
+        "Animate",
+        typeof(bool),
+        typeof(WpfChessboard),
+        new PropertyMetadata(true));
+
+    public bool Animate
+    {
+        get { return (bool)GetValue(AnimateProperty); }
+        set { SetValue(AnimateProperty, value); }
+    }
+
     public static readonly RoutedEvent OnMoveStartedEvent = EventManager.RegisterRoutedEvent(
         name: "OnMoveStarted",
         routingStrategy: RoutingStrategy.Bubble,
@@ -250,6 +262,18 @@ public partial class WpfChessboard : Canvas
     {
         add { AddHandler(OnMoveCompletedEvent, value); }
         remove { RemoveHandler(OnMoveCompletedEvent, value); }
+    }
+
+    public static readonly RoutedEvent OnMoveCancelledEvent = EventManager.RegisterRoutedEvent(
+        name: "OnMoveCancelled",
+        routingStrategy: RoutingStrategy.Bubble,
+        handlerType: typeof(RoutedEventHandler),
+        ownerType: typeof(WpfChessboard));
+
+    public event RoutedEventHandler OnMoveCancelled
+    {
+        add { AddHandler(OnMoveCancelledEvent, value); }
+        remove { RemoveHandler(OnMoveCancelledEvent, value); }
     }
 
     public WpfChessboard()
@@ -395,27 +419,37 @@ public partial class WpfChessboard : Canvas
         if (_pieceInHand == null)
             return;
 
-        var from = IdxToSquare(_pieceInHand.From);
-        var to = IdxToSquare(_squareUnderMouse);
+        var mousePos = e.GetPosition(this);
+        var isOutside = mousePos.X < 0 || mousePos.X > ActualWidth || mousePos.Y < 0 || mousePos.Y > ActualHeight;
 
-        if (from != to)
+        if (isOutside)
         {
-            if (_pieceInHand.Piece.Type == PieceType.Pawn
-                && (_pieceInHand.Piece.Side == ChessColor.Light && to[1] == '8'
-                    || _pieceInHand.Piece.Side == ChessColor.Dark && to[1] == '1'))
+            RaiseEvent(new MoveCancelledEventArgs(OnMoveCancelledEvent));
+        }
+        else
+        {
+            var from = IdxToSquare(_pieceInHand.From);
+            var to = IdxToSquare(_squareUnderMouse);
+
+            if (from != to)
             {
-                _promotionPopup = CreatePromotionPopup(from, to);
-            }
-            else
-            {
-                if (!UseLegalMoveDestinations || LegalMoveDestinations.Contains(to))
+                if (_pieceInHand.Piece.Type == PieceType.Pawn
+                    && (_pieceInHand.Piece.Side == ChessColor.Light && to[1] == '8'
+                        || _pieceInHand.Piece.Side == ChessColor.Dark && to[1] == '1'))
                 {
-                    _lastPlayerMove = (_pieceInHand.From, _squareUnderMouse);
-                    RaiseEvent(new MoveCompletedEventArgs(
-                        OnMoveCompletedEvent,
-                        from,
-                        to,
-                        '?'));
+                    _promotionPopup = CreatePromotionPopup(from, to);
+                }
+                else
+                {
+                    if (!UseLegalMoveDestinations || LegalMoveDestinations.Contains(to))
+                    {
+                        _lastPlayerMove = (_pieceInHand.From, _squareUnderMouse);
+                        RaiseEvent(new MoveCompletedEventArgs(
+                            OnMoveCompletedEvent,
+                            from,
+                            to,
+                            '?'));
+                    }
                 }
             }
         }
@@ -465,8 +499,10 @@ public partial class WpfChessboard : Canvas
         {
             if (_pieceInHand != null)
             {
+                Children.Remove(_pieceInHand.Image);
                 _pieceInHand = null;
                 _moveDestinations = [];
+                RaiseEvent(new MoveCancelledEventArgs(OnMoveCancelledEvent));
             }
             else if (_promotionPopup != null)
             {
@@ -929,94 +965,97 @@ public partial class WpfChessboard : Canvas
         if (d is not WpfChessboard cb)
             return;
 
-        if (e.NewValue is string pos && !string.IsNullOrEmpty(pos))
-        {
-            var originalNewPieces = GetPiecesFromFen(pos);
-            var allNewPieces = originalNewPieces.ToDictionary(p => p.Square, p => p);
-            var allOldPieces = cb._pieces.ToDictionary(p => p.Square, p => p);
-            var staticPieces = new List<Piece>(allNewPieces.Count);
-            var removedPieces = new List<Piece>();
-            var newPieces = new List<Piece>();
+        if (e.NewValue is not string pos || string.IsNullOrEmpty(pos))
+            throw new ArgumentNullException("Position can't be empty");
 
-            for (var square = 0; square < 64; square++)
+        if (!cb.Animate)
+        {
+            cb._pieces = GetPiecesFromFen(pos);
+            cb._lastPlayerMove = (-1, -1);
+            return;
+        }
+
+        var originalNewPieces = GetPiecesFromFen(pos);
+        var allNewPieces = originalNewPieces.ToDictionary(p => p.Square, p => p);
+        var allOldPieces = cb._pieces.ToDictionary(p => p.Square, p => p);
+        var staticPieces = new List<Piece>(allNewPieces.Count);
+        var removedPieces = new List<Piece>();
+        var newPieces = new List<Piece>();
+
+        for (var square = 0; square < 64; square++)
+        {
+            if (allNewPieces.TryGetValue(square, out var newPiece))
             {
-                if (allNewPieces.TryGetValue(square, out var newPiece))
+                if (allOldPieces.TryGetValue(square, out var oldPiece))
                 {
-                    if (allOldPieces.TryGetValue(square, out var oldPiece))
+                    if (newPiece == oldPiece)
                     {
-                        if (newPiece == oldPiece)
-                        {
-                            staticPieces.Add(newPiece);
-                        }
-                        else
-                        {
-                            // Draw the old piece until the capture animation ends, then the animation itself
-                            // will replace it with the final position
-                            removedPieces.Add(oldPiece);
-                            newPieces.Add(newPiece);
-                        }
+                        staticPieces.Add(newPiece);
                     }
                     else
                     {
+                        // Draw the old piece until the capture animation ends, then the animation itself
+                        // will replace it with the final position
+                        removedPieces.Add(oldPiece);
                         newPieces.Add(newPiece);
                     }
                 }
-                else if (allOldPieces.TryGetValue(square, out var oldPiece))
+                else
                 {
-                    removedPieces.Add(oldPiece);
+                    newPieces.Add(newPiece);
                 }
             }
-
-            var animations = new List<(ChessColor Side, PieceType Type, Point From, Point To)>();
-            var animationTargets = new HashSet<int>();
-
-            // Do not build animations when board wasn't drawn yet
-            if (cb._squaresRects[0] != null)
+            else if (allOldPieces.TryGetValue(square, out var oldPiece))
             {
-                foreach (var moved in newPieces)
+                removedPieces.Add(oldPiece);
+            }
+        }
+
+        var animations = new List<(ChessColor Side, PieceType Type, Point From, Point To)>();
+        var animationTargets = new HashSet<int>();
+
+        // Do not build animations when board wasn't drawn yet
+        if (cb._squaresRects[0] != null)
+        {
+            foreach (var moved in newPieces)
+            {
+                if (TryFindClosestPieceOfSameKind(moved, removedPieces, out var piece))
                 {
-                    if (TryFindClosestPieceOfSameKind(moved, removedPieces, out var piece))
-                    {
-                        // Do not animate manual moves made by dragging the piece
-                        if (piece.Square == cb._lastPlayerMove.From && moved.Square == cb._lastPlayerMove.To)
-                        {
-                            staticPieces.Add(moved);
-                        }
-                        else
-                        {
-                            animations.Add(
-                                (
-                                    piece.Side,
-                                    piece.Type,
-                                    cb.GetSquareRect(piece.Square).TopLeft,
-                                    cb.GetSquareRect(moved.Square).TopLeft
-                                )
-                            );
-                            animationTargets.Add(moved.Square);
-                        }
-                    }
-                    else
+                    // Do not animate manual moves made by dragging the piece
+                    if (piece.Square == cb._lastPlayerMove.From && moved.Square == cb._lastPlayerMove.To)
                     {
                         staticPieces.Add(moved);
                     }
+                    else
+                    {
+                        animations.Add(
+                            (
+                                piece.Side,
+                                piece.Type,
+                                cb.GetSquareRect(piece.Square).TopLeft,
+                                cb.GetSquareRect(moved.Square).TopLeft
+                            )
+                        );
+                        animationTargets.Add(moved.Square);
+                    }
+                }
+                else
+                {
+                    staticPieces.Add(moved);
                 }
             }
-
-            var captured = removedPieces.Where(rp => animationTargets.Contains(rp.Square));
-            staticPieces.AddRange(captured);
-
-            cb._pieces = staticPieces;
-            var animation = new PieceMoveAnimation(animations, originalNewPieces);
-            cb.CancelPieceAnimationIfExists();
-            animation.OnUpdated += cb.DrawPieceAnimation;
-            animation.OnCompleted += cb.CompletePieceAnimation;
-            cb._activeAnimation = animation;
-            animation.Start();
         }
-        else if (e.NewValue == null)
-        {
-            cb._pieces = GetPiecesFromFen(StartingPosition);
-        }
+
+        var captured = removedPieces.Where(rp => animationTargets.Contains(rp.Square));
+        staticPieces.AddRange(captured);
+
+        cb._pieces = staticPieces;
+        var animation = new PieceMoveAnimation(animations, originalNewPieces);
+        cb.CancelPieceAnimationIfExists();
+        animation.OnUpdated += cb.DrawPieceAnimation;
+        animation.OnCompleted += cb.CompletePieceAnimation;
+        cb._activeAnimation = animation;
+        animation.Start();
 
         cb._lastPlayerMove = (-1, -1);
     }
